@@ -1,18 +1,28 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client implements Runnable {
+
+    BufferedReader reader;
+    Socket client;
+
     public static void main(String[] args) {
         try {
             new Client().init();
         }
-        catch (IOException e){}
+        catch (IOException e){
+            if(e.getMessage().contains("Connection refused")) {
+                System.err.println("Server not found! " + e.getMessage());
+            }
+        }
     }
 
     public void init() throws IOException {
         ScannerUtils scanner = new ScannerUtils();
-        Socket client = new Socket("localhost",8080);
+        client = new Socket("localhost",8080);
         PrintWriter writer = new PrintWriter(client.getOutputStream());
 
         String currentText = scanner.getString("Type your name: ");
@@ -27,6 +37,16 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-
+        boolean error = false;
+        while(!error) {
+            try {
+                reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                System.out.println(reader.readLine());
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                error = true;
+            }
+        }
     }
 }

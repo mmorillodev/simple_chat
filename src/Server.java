@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Server {
 
@@ -36,13 +37,15 @@ public class Server {
 
         @Override
         public void run() {
-            while(true) {
+            boolean error = false;
+            while(!error) {
                 try {
                     clients.add(new ClientInfo(server.accept()));
                     System.out.println("Client connected: " + clients.get(clients.size() - 1).name);
                 }
                 catch (IOException e) {
                     e.printStackTrace();
+                    error = true;
                 }
             }
         }
@@ -51,21 +54,26 @@ public class Server {
     private class WaitMessages implements Runnable {
         ClientInfo client;
 
-        public WaitMessages(ClientInfo client) {
+        WaitMessages(ClientInfo client) {
             this.client = client;
         }
 
         @Override
         public void run() {
-            try {
-                sendToOthers(client, client.name + ": " + client.reader.readLine());
-            }
-            catch (IOException e) {
-                e.printStackTrace();
+            boolean error = false;
+
+            while(!error) {
+                try {
+                    sendToOthers(client, client.name + ": " + client.reader.readLine());
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                    error = true;
+                }
             }
         }
 
-        public void sendToOthers(ClientInfo client, String message) {
+        void sendToOthers(ClientInfo client, String message) {
             for (ClientInfo client_ : clients) {
                 if(client_ == client) continue;
                 client_.writer.println(message);
@@ -77,12 +85,10 @@ public class Server {
     private class ClientInfo {
         String          name;
         Socket          clientSocket;
-        BufferedReader  reader;
         PrintWriter     writer;
+        BufferedReader  reader;
 
-        public ClientInfo(Socket clientSocket)
-                throws IOException {
-
+        ClientInfo(Socket clientSocket) throws IOException {
             this.clientSocket = clientSocket;
             this.reader       = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             this.writer       = new PrintWriter(clientSocket.getOutputStream());
