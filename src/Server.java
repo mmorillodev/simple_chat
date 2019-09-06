@@ -13,8 +13,17 @@ public class Server implements Runnable {
         server = null;
         try {
             server = new ServerSocket(8080);
-        } catch(IOException e) {
+        }
+        catch(IOException e) {
             System.err.println("Port already in use!");
+        }
+        finally {
+            if(server != null) {
+                try {
+                    server.close();
+                }
+                catch (IOException e){}
+            }
         }
     }
 
