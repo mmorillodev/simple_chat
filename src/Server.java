@@ -1,14 +1,19 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server implements Runnable {
-    private final List<Socket> clients;
-    private final ServerSocket server;
+public class Server {
 
-    public Server() {
+    private final List<ClientInfo> clients;
+
+    private ServerSocket server;
+
+    private Server() {
         clients = new ArrayList<>();
         server = null;
         try {
@@ -17,30 +22,75 @@ public class Server implements Runnable {
         catch(IOException e) {
             System.err.println("Port already in use!");
         }
-        finally {
-            if(server != null) {
+    }
+
+    public static void main(String[] args) {
+        new Server().init();
+    }
+
+    private void init() {
+        new Thread(new KeepWaitingClients()).run();
+    }
+
+    private class KeepWaitingClients implements Runnable {
+
+        @Override
+        public void run() {
+            while(true) {
                 try {
-                    server.close();
+                    clients.add(new ClientInfo(server.accept()));
+                    System.out.println("Client connected: " + clients.get(clients.size() - 1).name);
                 }
-                catch (IOException e){}
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new Server().main();
+    private class WaitMessages implements Runnable {
+        ClientInfo client;
+
+        public WaitMessages(ClientInfo client) {
+            this.client = client;
+        }
+
+        @Override
+        public void run() {
+            try {
+                sendToOthers(client, client.name + ": " + client.reader.readLine());
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void sendToOthers(ClientInfo client, String message) {
+            for (ClientInfo client_ : clients) {
+                if(client_ == client) continue;
+                client_.writer.println(message);
+                client_.writer.flush();
+            }
+        }
     }
 
-    public void main() {
-        new Thread(this).run();
-    }
+    private class ClientInfo {
+        String          name;
+        Socket          clientSocket;
+        BufferedReader  reader;
+        PrintWriter     writer;
 
-    @Override
-    public void run() {
-        try {
-            clients.add(server.accept());
-        } catch (IOException e) {
-            e.printStackTrace();
+        public ClientInfo(Socket clientSocket)
+                throws IOException {
+
+            this.clientSocket = clientSocket;
+            this.reader       = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            this.writer       = new PrintWriter(clientSocket.getOutputStream());
+            this.name         = reader.readLine();
+
+            new Thread(new WaitMessages(this)).run();
         }
     }
 }
+
+
