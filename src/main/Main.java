@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Main {
 
-        private static final String OPTIONS;
+    private static final String OPTIONS;
 
     static {
         OPTIONS = "[S]erver or [C]lient? ";
@@ -20,7 +20,8 @@ public class Main {
                         c -> c == 'S' ||
                                 c == 'C' ||
                                 c == 's' ||
-                                c == 'c');
+                                c == 'c'
+                );
 
         if(opt == 'S' || opt == 's') {
             new Server().init();
