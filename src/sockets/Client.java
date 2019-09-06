@@ -1,3 +1,7 @@
+package sockets;
+
+import utils.ScannerUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,20 +12,20 @@ public class Client implements Runnable {
 
     private Socket client;
 
-    public static void main(String[] args) {
+    public Client() {
         try {
-            new Client().init();
+            client = new Socket("localhost", 8080);
         }
-        catch (IOException e){
-            if(e.getMessage().contains("Connection refused")) {
-                System.err.println("Server not found! " + e.getMessage());
+        catch (IOException e) {
+            if (e.getMessage().contains("Connection refused")) {
+                System.err.println("sockets.Server not found! " + e.getMessage());
             }
         }
     }
 
-    private void init() throws IOException {
+    public void init() throws IOException {
         ScannerUtils scanner = new ScannerUtils();
-        client = new Socket("localhost",8080);
+
         PrintWriter writer = new PrintWriter(client.getOutputStream());
 
         String currentText = scanner.getString("Type your name: ");

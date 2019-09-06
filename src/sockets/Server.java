@@ -1,3 +1,5 @@
+package sockets;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +15,7 @@ public class Server {
 
     private ServerSocket server;
 
-    private Server() {
+    public Server() {
         clients = new ArrayList<>();
         server = null;
         try {
@@ -24,11 +26,7 @@ public class Server {
         }
     }
 
-    public static void main(String[] args) {
-        new Server().init();
-    }
-
-    private void init() {
+    public void init() {
         new Thread(new KeepWaitingClients()).run();
     }
 
@@ -40,7 +38,7 @@ public class Server {
             while(!error) {
                 try {
                     clients.add(new ClientInfo(server.accept()));
-                    System.out.println("Client connected: " + clients.get(clients.size() - 1).name);
+                    System.out.println("sockets.Client connected: " + clients.get(clients.size() - 1).name);
                 }
                 catch (IOException e) {
                     e.printStackTrace();

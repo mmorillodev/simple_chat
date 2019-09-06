@@ -1,3 +1,5 @@
+package utils;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.function.Predicate;
