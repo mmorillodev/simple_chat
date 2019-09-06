@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85a29566-a916-4834-8db3-4a6c9c8dcc7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/ScannerUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/Server$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/Server$ClientInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/Server$KeepWaitingClients.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/Server$WaitMessages.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sockets/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScannerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ScannerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sockets/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+            <state relative-caret-position="391">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,7 +29,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sockets/Server.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
@@ -333,16 +322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sockets/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -352,6 +331,16 @@
             <element signature="e#774#775#0" expanded="true" />
             <element signature="e#1349#1350#0" expanded="true" />
             <element signature="e#1392#1393#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
