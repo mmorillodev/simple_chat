@@ -6,8 +6,7 @@ import java.net.Socket;
 
 public class Client implements Runnable {
 
-    BufferedReader reader;
-    Socket client;
+    private Socket client;
 
     public static void main(String[] args) {
         try {
@@ -20,7 +19,7 @@ public class Client implements Runnable {
         }
     }
 
-    public void init() throws IOException {
+    private void init() throws IOException {
         ScannerUtils scanner = new ScannerUtils();
         client = new Socket("localhost",8080);
         PrintWriter writer = new PrintWriter(client.getOutputStream());
@@ -38,6 +37,7 @@ public class Client implements Runnable {
     @Override
     public void run() {
         boolean error = false;
+        BufferedReader reader;
         while(!error) {
             try {
                 reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
