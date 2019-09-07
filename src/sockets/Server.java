@@ -8,19 +8,22 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
 
-    private ClientInfo client;
+    private List<ClientInfo> clients;
     private boolean isRunning;
+    private String name;
 
     private ServerSocket server;
 
     public Server() {
-        client = null;
         server = null;
         isRunning = true;
         ScannerUtils scanner = new ScannerUtils();
+        clients = new ArrayList<>();
 
         try {
             server = new ServerSocket(
@@ -38,24 +41,33 @@ public class Server {
 
     public void init() {
         ScannerUtils scanner = new ScannerUtils();
-        String message = scanner.getString("Type your name: ");
+        String message = "";
+        name = scanner.getString("Type your name: ");
 
-        new KeepWaitingClient().run();
+        new Thread(new KeepWaitingClient()).start();
 
-        cls();
-
-        System.out.println(client.name + " connected!");
-
-        client.writer.println(message);
-        client.writer.flush();
+//        cls();
 
         while (!message.equals("!SHUTDOWN")) {
-            message = scanner.getString("");
-            client.writer.println(message.trim());
-            client.writer.flush();
+            message = scanner.getString("").trim();
+            sendMessageToClients(name + ": " + message, null);
         }
 
         isRunning = false;
+    }
+
+    private void sendMessageToClients(String message, ClientInfo except) {
+        if(except == null) {
+            for (ClientInfo client : clients) {
+                client.sendMessage(message);
+            }
+        }
+        else {
+            for(ClientInfo client : clients) {
+                if(client == except) continue;
+                client.sendMessage(message);
+            }
+        }
     }
 
     private void cls() {
@@ -69,11 +81,19 @@ public class Server {
         @Override
         public void run() {
             try {
-                Socket sClient = server.accept();
-                client = new ClientInfo(sClient);
+                getClients();
              }
             catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+
+        void getClients() throws IOException {
+            while (isRunning) {
+                ClientInfo sClient = new ClientInfo(server.accept());
+                clients.add(sClient);
+                System.out.println(sClient.name + " connected!");
+                sClient.sendMessage("Connected to " + name);
             }
         }
     }
@@ -92,6 +112,7 @@ public class Server {
                 try {
                     message = client.reader.readLine();
                     System.out.println(client.name + ": " + message);
+                    sendMessageToClients(message, client);
                 }
                 catch (IOException e) {
                     e.printStackTrace();
@@ -114,8 +135,13 @@ public class Server {
             this.name         = reader.readLine();
 
             Thread messageReader = new Thread(new WaitMessages(this));
-            messageReader.setName("messageReader");
+            messageReader.setName("messageReader-"+name);
             messageReader.start();
+        }
+
+        void sendMessage(String message) {
+            writer.println(message);
+            writer.flush();
         }
     }
 }

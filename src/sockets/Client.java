@@ -33,16 +33,18 @@ public class Client implements Runnable {
 
     public void init() throws IOException {
         PrintWriter writer = new PrintWriter(client.getOutputStream());
+        String currentText = "";
 
-        String currentText = scanner.getString("Type your name: ");
+        String name = scanner.getString("Type your name: ");
+
         Thread messageReader = new Thread(this);
         messageReader.setName("messageReader");
         messageReader.start();
 
         while(!currentText.equals("!EXIT")) {
-            writer.println(currentText.trim());
-            writer.flush();
             currentText = scanner.getString("");
+            writer.println(name + ": " + currentText.trim());
+            writer.flush();
         }
 
         isRunning = false;
@@ -63,14 +65,14 @@ public class Client implements Runnable {
         BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
         String message;
 
-        cls();
+//        cls();
 
         String serverName = reader.readLine();
         System.out.println("Connected to " + serverName);
 
         while(isRunning) {
             message = reader.readLine();
-            System.out.println(serverName + ": " + message);
+            System.out.println(message);
         }
     }
 
