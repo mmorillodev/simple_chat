@@ -50,6 +50,10 @@ public class Server {
 
         while (!message.equals("!SHUTDOWN")) {
             message = scanner.getString("").trim();
+            if(message.equals("!CLS")) {
+                cls();
+                continue;
+            }
             sendMessageToClients(name + ": " + message, null);
         }
 
@@ -92,7 +96,7 @@ public class Server {
             while (isRunning) {
                 ClientInfo sClient = new ClientInfo(server.accept());
                 clients.add(sClient);
-                System.out.println(name + " connected");
+                System.out.println(sClient.name + " connected");
                 sClient.sendMessage("Connected to " + name);
             }
         }

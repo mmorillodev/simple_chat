@@ -36,13 +36,19 @@ public class Client implements Runnable {
         String currentText = "";
 
         String name = scanner.getString("Type your name: ");
+        writer.print(name);
+        writer.flush();
 
         Thread messageReader = new Thread(this);
         messageReader.setName("messageReader");
         messageReader.start();
 
         while(!currentText.equals("!EXIT")) {
-            currentText = scanner.getString("");
+            currentText = scanner.getString("").trim();
+            if(currentText.equals("!CLS")) {
+                cls();
+                continue;
+            }
             writer.println(name + ": " + currentText.trim());
             writer.flush();
         }
@@ -64,8 +70,6 @@ public class Client implements Runnable {
         isRunning = true;
         BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
         String message;
-
-//        cls();
 
         while(isRunning) {
             message = reader.readLine();
