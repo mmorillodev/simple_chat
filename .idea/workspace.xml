@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f82c59b-ac4f-4fc6-9a63-dc0a4991d422" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$ClientInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$ClientInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$KeepWaitingClients.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$KeepWaitingClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$KeepWaitingClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$WaitMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$WaitMessages.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sockets/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sockets/Client.java" afterDir="false" />

@@ -42,16 +42,26 @@ public class Server {
 
         new KeepWaitingClient().run();
 
-        client.writer.println("Connected to " + message + "!");
+        cls();
+
+        System.out.println(client.name + " connected!");
+
+        client.writer.println(message);
         client.writer.flush();
 
         while (!message.equals("!SHUTDOWN")) {
             message = scanner.getString("");
-            client.writer.println(message.trim() + "\n");
+            client.writer.println(message.trim());
             client.writer.flush();
         }
 
         isRunning = false;
+    }
+
+    private void cls() {
+        for (int i = 0; i < 20; i++) {
+            System.out.println();
+        }
     }
 
     private class KeepWaitingClient implements Runnable {
@@ -103,13 +113,9 @@ public class Server {
             this.writer       = new PrintWriter(clientSocket.getOutputStream());
             this.name         = reader.readLine();
 
-            System.out.println(name + " connected!");
-
             Thread messageReader = new Thread(new WaitMessages(this));
             messageReader.setName("messageReader");
             messageReader.start();
         }
     }
 }
-
-

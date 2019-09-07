@@ -40,7 +40,7 @@ public class Client implements Runnable {
         messageReader.start();
 
         while(!currentText.equals("!EXIT")) {
-            writer.println(currentText.trim() + "\n");
+            writer.println(currentText.trim());
             writer.flush();
             currentText = scanner.getString("");
         }
@@ -63,9 +63,20 @@ public class Client implements Runnable {
         BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
         String message;
 
+        cls();
+
+        String serverName = reader.readLine();
+        System.out.println("Connected to " + serverName);
+
         while(isRunning) {
             message = reader.readLine();
-            System.out.println(message);
+            System.out.println(serverName + ": " + message);
+        }
+    }
+
+    private void cls() {
+        for (int i = 0; i < 20; i++) {
+            System.out.println();
         }
     }
 }
