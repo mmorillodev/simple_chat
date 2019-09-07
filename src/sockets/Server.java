@@ -129,7 +129,7 @@ public class Server {
         Socket clientSocket;
         PrintWriter writer;
         BufferedReader reader;
-        String name;
+//        String name;
 
         ClientInfo(Socket clientSocket) throws IOException {
             this.clientSocket = clientSocket;
