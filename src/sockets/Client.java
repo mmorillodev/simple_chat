@@ -36,8 +36,8 @@ public class Client implements Runnable {
         String currentText = "";
 
         String name = scanner.getString("Type your name: ");
-        writer.print(name);
-        writer.flush();
+//        writer.print(name);
+//        writer.flush();
 
         Thread messageReader = new Thread(this);
         messageReader.setName("messageReader");
@@ -49,6 +49,9 @@ public class Client implements Runnable {
                 cls();
                 continue;
             }
+            if(currentText.length() == 0)
+                continue;
+
             writer.println(name + ": " + currentText.trim());
             writer.flush();
         }

@@ -15,15 +15,14 @@ public class Server {
 
     private List<ClientInfo> clients;
     private boolean isRunning;
-    private String name;
 
     private ServerSocket server;
 
     public Server() {
         server = null;
         isRunning = true;
-        ScannerUtils scanner = new ScannerUtils();
         clients = new ArrayList<>();
+        ScannerUtils scanner = new ScannerUtils();
 
         try {
             server = new ServerSocket(
@@ -42,11 +41,9 @@ public class Server {
     public void init() {
         ScannerUtils scanner = new ScannerUtils();
         String message = "";
-        name = scanner.getString("Type your name: ");
+        String name = scanner.getString("Type your name: ");
 
         new Thread(new KeepWaitingClient()).start();
-
-//        cls();
 
         while (!message.equals("!SHUTDOWN")) {
             message = scanner.getString("").trim();
@@ -54,6 +51,9 @@ public class Server {
                 cls();
                 continue;
             }
+            if(message.length() == 0)
+                continue;
+
             sendMessageToClients(name + ": " + message, null);
         }
 
@@ -96,8 +96,8 @@ public class Server {
             while (isRunning) {
                 ClientInfo sClient = new ClientInfo(server.accept());
                 clients.add(sClient);
-                System.out.println(sClient.name + " connected");
-                sClient.sendMessage("Connected to " + name);
+                //System.out.println(sClient.name + " connected");
+                //sClient.sendMessage("Connected to " + name);
             }
         }
     }
@@ -125,21 +125,20 @@ public class Server {
             }
         }
     }
-
-    private class ClientInfo {
-        String          name;
-        Socket          clientSocket;
-        PrintWriter     writer;
-        BufferedReader  reader;
+    class ClientInfo {
+        Socket clientSocket;
+        PrintWriter writer;
+        BufferedReader reader;
+        String name;
 
         ClientInfo(Socket clientSocket) throws IOException {
             this.clientSocket = clientSocket;
             this.reader       = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             this.writer       = new PrintWriter(clientSocket.getOutputStream());
-            this.name         = reader.readLine();
+//            this.name         = reader.readLine();
 
-            Thread messageReader = new Thread(new WaitMessages(this));
-            messageReader.setName("messageReader-"+name);
+            Thread messageReader = new Thread(new Server.WaitMessages(this));
+            messageReader.setName("messageReader-"+toString());
             messageReader.start();
         }
 
