@@ -67,9 +67,6 @@ public class Client implements Runnable {
 
 //        cls();
 
-        String serverName = reader.readLine();
-        System.out.println("Connected to " + serverName);
-
         while(isRunning) {
             message = reader.readLine();
             System.out.println(message);

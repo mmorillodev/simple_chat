@@ -92,7 +92,7 @@ public class Server {
             while (isRunning) {
                 ClientInfo sClient = new ClientInfo(server.accept());
                 clients.add(sClient);
-                System.out.println(sClient.name + " connected!");
+                System.out.println(name + " connected");
                 sClient.sendMessage("Connected to " + name);
             }
         }
@@ -111,7 +111,7 @@ public class Server {
             while(isRunning) {
                 try {
                     message = client.reader.readLine();
-                    System.out.println(client.name + ": " + message);
+                    System.out.println(message);
                     sendMessageToClients(message, client);
                 }
                 catch (IOException e) {
