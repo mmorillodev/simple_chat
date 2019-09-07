@@ -11,10 +11,18 @@ import java.net.Socket;
 public class Client implements Runnable {
 
     private Socket client;
+    private boolean isRunning;
+
+    private final ScannerUtils scanner;
 
     public Client() {
+        scanner = new ScannerUtils();
         try {
-            client = new Socket("localhost", 8080);
+            client = new Socket(
+                    scanner.getString("Enter the IP to connect: "),
+                    scanner.getInt("Enter the port to connect: ", n -> n >= 0 && n < 49152)
+            );
+            scanner.clearBuffer();
         }
         catch (IOException e) {
             if (e.getMessage().contains("Connection refused")) {
@@ -24,33 +32,40 @@ public class Client implements Runnable {
     }
 
     public void init() throws IOException {
-        ScannerUtils scanner = new ScannerUtils();
-
         PrintWriter writer = new PrintWriter(client.getOutputStream());
 
         String currentText = scanner.getString("Type your name: ");
-        new Thread(this).run();
+        Thread messageReader = new Thread(this);
+        messageReader.setName("messageReader");
+        messageReader.start();
 
         while(!currentText.equals("!EXIT")) {
-            writer.println(currentText);
+            writer.println(currentText.trim() + "\n");
             writer.flush();
-            currentText = scanner.getString("-> ");
+            currentText = scanner.getString("");
         }
+
+        isRunning = false;
     }
 
     @Override
     public void run() {
-        boolean error = false;
-        BufferedReader reader;
-        while(!error) {
-            try {
-                reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                System.out.println(reader.readLine());
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-                error = true;
-            }
+        try {
+            readMessages();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readMessages() throws IOException {
+        isRunning = true;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        String message;
+
+        while(isRunning) {
+            message = reader.readLine();
+            System.out.println(message);
         }
     }
 }
