@@ -9,19 +9,18 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Server {
 
     private List<ClientInfo> clients;
-//    private boolean isRunning;
 
     private ServerSocket server;
 
     public Server() {
         server = null;
-//        isRunning = true;
-        clients = new ArrayList<>();
+        clients = new LinkedList<>();
         ScannerUtils scanner = new ScannerUtils();
 
         try {
@@ -57,7 +56,6 @@ public class Server {
             sendMessageToClients(name + ": " + message, null);
         }
 
-//        isRunning = false;
         System.exit(0);
     }
 
@@ -83,18 +81,25 @@ public class Server {
 
     private class KeepWaitingClient implements Runnable {
 
+        private boolean keepWaiting;
+
+        KeepWaitingClient() {
+            keepWaiting = true;
+        }
+
         @Override
         public void run() {
             try {
                 getClients();
              }
             catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Unexpected error thrown: " + e.getMessage());
+                keepWaiting = false;
             }
         }
 
         void getClients() throws IOException {
-            while (true) {
+            while (keepWaiting) {
                 ClientInfo sClient = new ClientInfo(server.accept());
                 clients.add(sClient);
             }
@@ -110,10 +115,10 @@ public class Server {
 
         @Override
         public void run() {
-//            boolean isRunning = true;
+            boolean isRunning = true;
             String message;
 
-            while(true) {
+            while(isRunning) {
                 try {
                     message = client.reader.readLine();
                     System.out.println(message);
@@ -122,7 +127,6 @@ public class Server {
                 catch (IOException e) {
                     clients.remove(client);
                     System.out.println("Client disconnected!");
-//                    isRunning = false;
                 }
             }
         }

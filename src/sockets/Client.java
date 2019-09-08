@@ -11,7 +11,6 @@ import java.net.Socket;
 public class Client implements Runnable {
 
     private Socket client;
-//    private boolean isRunning;
 
     private final ScannerUtils scanner;
 
@@ -55,7 +54,7 @@ public class Client implements Runnable {
             writer.println(name + ": " + currentText.trim());
             writer.flush();
         }
-//        isRunning = false;
+
         System.exit(0);
     }
 
@@ -66,7 +65,6 @@ public class Client implements Runnable {
         }
         catch (IOException e) {
             System.out.println("Server disconnected!");
-//            isRunning = false;
         }
     }
 
