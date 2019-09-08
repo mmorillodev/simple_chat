@@ -8,13 +8,12 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        char opt = new ScannerUtils()
-                .getChar(
-                        StaticResources.MENU_OPTIONS,
-                        c -> c == 'S' ||
-                                c == 'C' ||
-                                c == 's' ||
-                                c == 'c'
+        char opt = new ScannerUtils().getChar(
+                    StaticResources.MENU_OPTIONS,
+                    c -> c == 'S' ||
+                        c == 'C' ||
+                        c == 's' ||
+                        c == 'c'
                 );
 
         if(opt == 'S' || opt == 's') {

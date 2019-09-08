@@ -2,6 +2,7 @@ package sockets;
 
 import utils.ScannerUtils;
 import utils.StaticResources;
+import static utils.StaticResources.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,8 +12,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
-
-import static utils.StaticResources.*;
+import static java.lang.System.out;
 
 public class Server {
 
@@ -77,7 +77,7 @@ public class Server {
 
     private void cls() {
         for (int i = 0; i < 100; i++) {
-            System.out.println();
+            out.println();
         }
     }
 
@@ -95,7 +95,7 @@ public class Server {
                 getClients();
              }
             catch (IOException e) {
-                System.out.println(EXCEPTION_THROWN_PREFIX + e.getMessage());
+                out.println(EXCEPTION_THROWN_PREFIX + e.getMessage());
                 keepWaiting = false;
             }
         }
@@ -122,12 +122,13 @@ public class Server {
             while(isRunning) {
                 try {
                     message = client.reader.readLine();
-                    System.out.println(message);
+                    out.println(message);
                     sendMessageToClients(message, client);
                 }
                 catch (IOException e) {
                     clients.remove(client);
-                    System.out.println(DISCONNECTED_CLIENT_MSG);
+                    out.println(DISCONNECTED_CLIENT_MSG);
+                    isRunning = false;
                 }
             }
         }
@@ -144,7 +145,7 @@ public class Server {
             this.writer       = new PrintWriter(clientSocket.getOutputStream());
 //            this.name         = reader.readLine();
 
-            System.out.println(CONNECTED_CLIENT_MSG);
+            out.println(CONNECTED_CLIENT_MSG);
 
             Thread messageReader = new Thread(new Server.WaitMessages(this));
             messageReader.setName("messageReader-"+toString());

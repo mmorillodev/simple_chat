@@ -1,14 +1,14 @@
 package sockets;
 
 import utils.ScannerUtils;
+import static utils.StaticResources.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
-import static utils.StaticResources.*;
+import static java.lang.System.out;
 
 public class Client implements Runnable {
 
@@ -64,7 +64,7 @@ public class Client implements Runnable {
             readMessages();
         }
         catch (IOException e) {
-            System.out.println(SERVER_DISCONNECTED_MSG);
+            out.println(SERVER_DISCONNECTED_MSG);
         }
     }
 
@@ -74,13 +74,13 @@ public class Client implements Runnable {
 
         while(true) {
             message = reader.readLine();
-            System.out.println(message);
+            out.println(message);
         }
     }
 
     private void cls() {
         for (int i = 0; i < 100; i++) {
-            System.out.println();
+            out.println();
         }
     }
 }
