@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import static utils.StaticResources.*;
+
 public class Client implements Runnable {
 
     private Socket client;
@@ -18,14 +20,14 @@ public class Client implements Runnable {
         scanner = new ScannerUtils();
         try {
             client = new Socket(
-                    scanner.getString("Enter the IP to connect: "),
-                    scanner.getInt("Enter the port to connect: ", n -> n >= 0 && n < 49152)
+                    scanner.getString(IP_REQUEST_MSG),
+                    scanner.getInt(CONNECTION_PORT_REQUEST_MSG, n -> n >= 0 && n < 49152)
             );
             scanner.clearBuffer();
         }
         catch (IOException e) {
-            if (e.getMessage().contains("Connection refused")) {
-                System.err.println("sockets.Server not found! " + e.getMessage());
+            if (e.getMessage().contains(CONNECTION_REFUSED_MSG)) {
+                System.err.println(SERVER_NOT_FOUND_ERROR_PREFIX + e.getMessage());
             }
         }
     }
@@ -34,15 +36,15 @@ public class Client implements Runnable {
         PrintWriter writer = new PrintWriter(client.getOutputStream());
         String currentText = "";
 
-        String name = scanner.getString("Type your name: ");
+        String name = scanner.getString(NAME_REQUEST_MSG);
 
         Thread messageReader = new Thread(this);
         messageReader.setName("messageReader");
         messageReader.start();
 
-        while(!currentText.equals("!EXIT")) {
+        while(!currentText.equals(LEAVE_SERVER_PREFIX)) {
             currentText = scanner.getString("").trim();
-            if(currentText.equals("!CLS")) {
+            if(currentText.equals(CLEAR_CLI_PREFIX)) {
                 cls();
                 continue;
             }
@@ -62,7 +64,7 @@ public class Client implements Runnable {
             readMessages();
         }
         catch (IOException e) {
-            System.out.println("Server disconnected!");
+            System.out.println(SERVER_DISCONNECTED_MSG);
         }
     }
 

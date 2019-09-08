@@ -1,22 +1,16 @@
 package main;
 
-import utils.ScannerUtils;
+import utils.*;
 import sockets.*;
 
 import java.io.IOException;
 
 public class Main {
 
-    private static final String OPTIONS;
-
-    static {
-        OPTIONS = "[S]erver or [C]lient? ";
-    }
-
     public static void main(String[] args) {
         char opt = new ScannerUtils()
                 .getChar(
-                        OPTIONS,
+                        StaticResources.MENU_OPTIONS,
                         c -> c == 'S' ||
                                 c == 'C' ||
                                 c == 's' ||

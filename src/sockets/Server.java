@@ -1,6 +1,7 @@
 package sockets;
 
 import utils.ScannerUtils;
+import utils.StaticResources;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,9 +9,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import static utils.StaticResources.*;
 
 public class Server {
 
@@ -26,27 +28,27 @@ public class Server {
         try {
             server = new ServerSocket(
                     scanner.getInt(
-                            "Enter the port the server will listen: ",
+                            SERVER_PORT_REQUEST_MSG,
                             n -> n >= 0 && n < 49152
                     )
             );
             scanner.clearBuffer();
         }
         catch(IOException e) {
-            System.err.println("Port already in use!");
+            System.err.println(PORT_OCCUPIED_ERROR);
         }
     }
 
     public void init() {
         ScannerUtils scanner = new ScannerUtils();
         String message = "";
-        String name = scanner.getString("Type your name: ");
+        String name = scanner.getString(NAME_REQUEST_MSG);
 
         new Thread(new KeepWaitingClient()).start();
 
-        while (!message.equals("!SHUTDOWN")) {
+        while (!message.equals(SHUTDOWN_SERVER_PREFIX)) {
             message = scanner.getString("").trim();
-            if(message.equals("!CLS")) {
+            if(message.equals(StaticResources.CLEAR_CLI_PREFIX)) {
                 cls();
                 continue;
             }
@@ -93,15 +95,14 @@ public class Server {
                 getClients();
              }
             catch (IOException e) {
-                System.out.println("Unexpected error thrown: " + e.getMessage());
+                System.out.println(EXCEPTION_THROWN_PREFIX + e.getMessage());
                 keepWaiting = false;
             }
         }
 
         void getClients() throws IOException {
             while (keepWaiting) {
-                ClientInfo sClient = new ClientInfo(server.accept());
-                clients.add(sClient);
+                clients.add(new ClientInfo(server.accept()));
             }
         }
     }
@@ -126,7 +127,7 @@ public class Server {
                 }
                 catch (IOException e) {
                     clients.remove(client);
-                    System.out.println("Client disconnected!");
+                    System.out.println(DISCONNECTED_CLIENT_MSG);
                 }
             }
         }
@@ -143,7 +144,7 @@ public class Server {
             this.writer       = new PrintWriter(clientSocket.getOutputStream());
 //            this.name         = reader.readLine();
 
-            System.out.println("Client connected!");
+            System.out.println(CONNECTED_CLIENT_MSG);
 
             Thread messageReader = new Thread(new Server.WaitMessages(this));
             messageReader.setName("messageReader-"+toString());
