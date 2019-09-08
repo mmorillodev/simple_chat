@@ -7,9 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f82c59b-ac4f-4fc6-9a63-dc0a4991d422" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sockets/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sockets/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$ClientInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$ClientInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$KeepWaitingClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$KeepWaitingClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$WaitMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$WaitMessages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sockets/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sockets/Server.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

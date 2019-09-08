@@ -17,7 +17,6 @@ import static java.lang.System.out;
 public class Server {
 
     private List<ClientInfo> clients;
-
     private ServerSocket server;
 
     public Server() {
