@@ -11,7 +11,7 @@ import java.net.Socket;
 public class Client implements Runnable {
 
     private Socket client;
-    private boolean isRunning;
+//    private boolean isRunning;
 
     private final ScannerUtils scanner;
 
@@ -55,8 +55,8 @@ public class Client implements Runnable {
             writer.println(name + ": " + currentText.trim());
             writer.flush();
         }
-
-        isRunning = false;
+//        isRunning = false;
+        System.exit(0);
     }
 
     @Override
@@ -65,23 +65,23 @@ public class Client implements Runnable {
             readMessages();
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Server disconnected!");
+//            isRunning = false;
         }
     }
 
     private void readMessages() throws IOException {
-        isRunning = true;
         BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
         String message;
 
-        while(isRunning) {
+        while(true) {
             message = reader.readLine();
             System.out.println(message);
         }
     }
 
     private void cls() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             System.out.println();
         }
     }

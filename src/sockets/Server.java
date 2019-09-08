@@ -14,13 +14,13 @@ import java.util.List;
 public class Server {
 
     private List<ClientInfo> clients;
-    private boolean isRunning;
+//    private boolean isRunning;
 
     private ServerSocket server;
 
     public Server() {
         server = null;
-        isRunning = true;
+//        isRunning = true;
         clients = new ArrayList<>();
         ScannerUtils scanner = new ScannerUtils();
 
@@ -57,7 +57,8 @@ public class Server {
             sendMessageToClients(name + ": " + message, null);
         }
 
-        isRunning = false;
+//        isRunning = false;
+        System.exit(0);
     }
 
     private void sendMessageToClients(String message, ClientInfo except) {
@@ -75,7 +76,7 @@ public class Server {
     }
 
     private void cls() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             System.out.println();
         }
     }
@@ -93,11 +94,9 @@ public class Server {
         }
 
         void getClients() throws IOException {
-            while (isRunning) {
+            while (true) {
                 ClientInfo sClient = new ClientInfo(server.accept());
                 clients.add(sClient);
-                //System.out.println(sClient.name + " connected");
-                //sClient.sendMessage("Connected to " + name);
             }
         }
     }
@@ -111,16 +110,19 @@ public class Server {
 
         @Override
         public void run() {
+//            boolean isRunning = true;
             String message;
-            while(isRunning) {
+
+            while(true) {
                 try {
                     message = client.reader.readLine();
                     System.out.println(message);
                     sendMessageToClients(message, client);
                 }
                 catch (IOException e) {
-                    e.printStackTrace();
-                    isRunning = false;
+                    clients.remove(client);
+                    System.out.println("Client disconnected!");
+//                    isRunning = false;
                 }
             }
         }
@@ -136,6 +138,8 @@ public class Server {
             this.reader       = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             this.writer       = new PrintWriter(clientSocket.getOutputStream());
 //            this.name         = reader.readLine();
+
+            System.out.println("Client connected!");
 
             Thread messageReader = new Thread(new Server.WaitMessages(this));
             messageReader.setName("messageReader-"+toString());
