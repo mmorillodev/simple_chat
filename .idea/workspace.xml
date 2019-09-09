@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="chat" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="85a29566-a916-4834-8db3-4a6c9c8dcc7b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
+=======
+    <list default="true" id="9f82c59b-ac4f-4fc6-9a63-dc0a4991d422" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$ClientInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$ClientInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$KeepWaitingClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$KeepWaitingClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$WaitMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server$WaitMessages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/simple_chat/sockets/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sockets/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sockets/Server.java" afterDir="false" />
+    </list>
+>>>>>>> 114fb8ad424d46da2782938e1d3061395ed6ba00
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="DefaultGradleProjectSettings">
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
@@ -75,6 +94,8 @@
       </file>
     </leaf>
   </component>
+=======
+>>>>>>> 114fb8ad424d46da2782938e1d3061395ed6ba00
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -82,78 +103,15 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>Socket</find>
-      <find>Socket(</find>
-      <find>WaitMessages</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/ScannerUtils.java" />
-        <option value="$PROJECT_DIR$/src/Client.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/Server.java" />
-        <option value="$PROJECT_DIR$/src/sockets/Client.java" />
-        <option value="$PROJECT_DIR$/src/main/Main.java" />
-        <option value="$PROJECT_DIR$/src/sockets/Server.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="522" />
-    <option name="y" value="-8" />
-    <option name="width" value="1378" />
-    <option name="height" value="745" />
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Course" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="simple_chat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simple_chat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simple_chat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simple_chat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="simple_chat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="simple_chat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
+  <component name="ProjectId" id="1QVfP7Aflm1IwLoXq3UOo8iN4GV" />
   <component name="PropertiesComponent">
-    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="simple_chat" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -167,14 +125,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="sockets.Client" />
-      <module name="simple_chat" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="simple_chat" />
@@ -188,18 +139,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="sockets.Server" />
-      <module name="simple_chat" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
   </component>
@@ -208,14 +150,15 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="85a29566-a916-4834-8db3-4a6c9c8dcc7b" name="Default Changelist" comment="" />
-      <created>1567774224714</created>
+      <changelist id="9f82c59b-ac4f-4fc6-9a63-dc0a4991d422" name="Default Changelist" comment="" />
+      <created>1567860656536</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1567774224714</updated>
+      <updated>1567860656536</updated>
     </task>
     <servers />
   </component>
+<<<<<<< HEAD
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
@@ -429,5 +372,19 @@
         </settings>
       </state>
     </states>
+=======
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+>>>>>>> 114fb8ad424d46da2782938e1d3061395ed6ba00
   </component>
 </project>
