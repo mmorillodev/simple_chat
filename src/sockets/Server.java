@@ -18,6 +18,7 @@ public class Server {
 
     private List<ClientInfo> clients;
     private ServerSocket server;
+    private String name;
 
     public Server() {
         server = null;
@@ -32,6 +33,7 @@ public class Server {
                     )
             );
             scanner.clearBuffer();
+            name = scanner.getString(NAME_REQUEST_MSG);
         }
         catch(IOException e) {
             System.err.println(PORT_OCCUPIED_ERROR);
@@ -41,20 +43,23 @@ public class Server {
     public void init() {
         ScannerUtils scanner = new ScannerUtils();
         String message = "";
-        String name = scanner.getString(NAME_REQUEST_MSG);
 
         new Thread(new KeepWaitingClient()).start();
 
-        while (!message.equals(SHUTDOWN_SERVER_PREFIX)) {
+        while (!message.equalsIgnoreCase(SHUTDOWN_SERVER_PREFIX)) {
             message = scanner.getString("").trim();
-            if(message.equals(StaticResources.CLEAR_CLI_PREFIX)) {
-                cls();
-                continue;
+            if(message.length() != 0) {
+                if (message.equalsIgnoreCase(StaticResources.CLEAR_CLI_PREFIX)) {
+                    cls();
+                }
+                else if (message.equalsIgnoreCase(CHANGE_NICKNAME_PREFIX)) {
+                    message = this.name + " has changed its nickname to " + (this.name = scanner.getString(NAME_REQUEST_MSG));
+                    sendMessageToClients(message, null);
+                }
+                else {
+                    sendMessageToClients(name + ": " + message, null);
+                }
             }
-            if(message.length() == 0)
-                continue;
-
-            sendMessageToClients(name + ": " + message, null);
         }
 
         System.exit(0);
@@ -136,13 +141,11 @@ public class Server {
         Socket clientSocket;
         PrintWriter writer;
         BufferedReader reader;
-//        String name;
 
         ClientInfo(Socket clientSocket) throws IOException {
             this.clientSocket = clientSocket;
             this.reader       = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             this.writer       = new PrintWriter(clientSocket.getOutputStream());
-//            this.name         = reader.readLine();
 
             out.println(CONNECTED_CLIENT_MSG);
 

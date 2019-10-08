@@ -20,12 +20,7 @@ public class Main {
             new Server().init();
         }
         else {
-            try {
-                new Client().init();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+            new Client().init();
         }
     }
 }

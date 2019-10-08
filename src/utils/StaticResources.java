@@ -17,6 +17,7 @@ public class StaticResources {
     public static final String SHUTDOWN_SERVER_PREFIX;
     public static final String LEAVE_SERVER_PREFIX;
     public static final String CLEAR_CLI_PREFIX;
+    public static final String CHANGE_NICKNAME_PREFIX;
 
     static {
         MENU_OPTIONS                    = "[S]erver or [C]lient? ";
@@ -34,5 +35,6 @@ public class StaticResources {
         LEAVE_SERVER_PREFIX             = "!EXIT";
         SHUTDOWN_SERVER_PREFIX          = "!SHUTDOWN";
         CLEAR_CLI_PREFIX                = "!CLS";
+        CHANGE_NICKNAME_PREFIX          = "!CHANGE";
     }
 }

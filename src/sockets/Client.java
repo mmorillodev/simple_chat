@@ -13,6 +13,8 @@ import static java.lang.System.out;
 public class Client implements Runnable {
 
     private Socket client;
+    private String name;
+    private PrintWriter writer;
 
     private final ScannerUtils scanner;
 
@@ -24,6 +26,9 @@ public class Client implements Runnable {
                     scanner.getInt(CONNECTION_PORT_REQUEST_MSG, n -> n >= 0 && n < 49152)
             );
             scanner.clearBuffer();
+
+            this.name = scanner.getString(NAME_REQUEST_MSG);
+            this.writer = new PrintWriter(client.getOutputStream());
         }
         catch (IOException e) {
             if (e.getMessage().contains(CONNECTION_REFUSED_MSG)) {
@@ -32,27 +37,28 @@ public class Client implements Runnable {
         }
     }
 
-    public void init() throws IOException {
-        PrintWriter writer = new PrintWriter(client.getOutputStream());
+    public void init() {
         String currentText = "";
-
-        String name = scanner.getString(NAME_REQUEST_MSG);
 
         Thread messageReader = new Thread(this);
         messageReader.setName("messageReader");
         messageReader.start();
 
-        while(!currentText.equals(LEAVE_SERVER_PREFIX)) {
+        while(!currentText.equalsIgnoreCase(LEAVE_SERVER_PREFIX)) {
             currentText = scanner.getString("").trim();
-            if(currentText.equals(CLEAR_CLI_PREFIX)) {
-                cls();
-                continue;
-            }
-            if(currentText.length() == 0)
-                continue;
 
-            writer.println(name + ": " + currentText.trim());
-            writer.flush();
+            if(currentText.length() != 0) {
+                if (currentText.equalsIgnoreCase(CLEAR_CLI_PREFIX)) {
+                    cls();
+                }
+                else if (currentText.equalsIgnoreCase(CHANGE_NICKNAME_PREFIX)) {
+                    currentText = this.name + " has changed its nickname to " + (this.name = scanner.getString(NAME_REQUEST_MSG));
+                    sendMessage(currentText);
+                }
+                else {
+                    sendMessage(currentText);
+                }
+            }
         }
 
         System.exit(0);
@@ -66,6 +72,11 @@ public class Client implements Runnable {
         catch (IOException e) {
             out.println(SERVER_DISCONNECTED_MSG);
         }
+    }
+
+    private void sendMessage(String message) {
+        this.writer.println(this.name + ": " + message.trim());
+        this.writer.flush();
     }
 
     private void readMessages() throws IOException {
