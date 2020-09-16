@@ -10,17 +10,13 @@ public class Main {
     public static void main(String[] args) {
         char opt = new ScannerUtils().getChar(
                     StaticResources.MENU_OPTIONS,
-                    c -> c == 'S' ||
-                        c == 'C' ||
-                        c == 's' ||
-                        c == 'c'
+                    c -> Character.toLowerCase(c) == 's' || Character.toLowerCase(c) == 'c'
                 );
 
-        if(opt == 'S' || opt == 's') {
-            new Server().init();
-        }
-        else {
-            new Client().init();
+        try {
+            new ConnectionUtils().connect(opt);
+        } catch (IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
         }
     }
 }
